@@ -9,28 +9,23 @@ class SplashScreenView extends GetView<SplashScreenController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        // Gunakan BoxDecoration untuk gradasi warna
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            colors: [AppColors.primaryColor, AppColors.scaffoldBgColor2],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-          ),
-        ),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset('assets/logo_splash.png'),
-              const SizedBox(
-                height: 20,
-              ),
-              const CircularProgressIndicator(
-                color: AppColors.loadingIndicatorColor,
-              ),
-            ],
-          ),
+      backgroundColor: AppColors.scaffoldBgColor,
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(
+              'assets/logo.png',
+              fit: BoxFit.cover,
+              filterQuality: FilterQuality.high,
+            ),
+            const SizedBox(
+              height: 50,
+            ),
+            const CircularProgressIndicator(
+              color: AppColors.loadingIndicatorColor,
+            ),
+          ],
         ),
       ),
     );
