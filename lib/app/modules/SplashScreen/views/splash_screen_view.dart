@@ -10,22 +10,25 @@ class SplashScreenView extends GetView<SplashScreenController> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.scaffoldBgColor,
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image.asset(
-              'assets/logo.png',
-              fit: BoxFit.cover,
-              filterQuality: FilterQuality.high,
-            ),
-            const SizedBox(
-              height: 50,
-            ),
-            const CircularProgressIndicator(
-              color: AppColors.loadingIndicatorColor,
-            ),
-          ],
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(
+                'assets/logo.png',
+                fit: BoxFit.cover,
+                filterQuality: FilterQuality.high,
+              ),
+              const SizedBox(
+                height: 50,
+              ),
+              const CircularProgressIndicator(
+                color: AppColors.loadingIndicatorColor,
+              ),
+            ],
+          ),
         ),
       ),
     );

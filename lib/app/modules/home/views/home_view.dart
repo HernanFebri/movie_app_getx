@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:movie_app/utils/colors.dart';
-import '../../../../widgets/movies_slider.dart';
-import '../../../../widgets/trending_slider.dart';
+import 'package:movie_app/widgets/trending_slider.dart';
+import 'package:movie_app/widgets/movies_slider.dart';
 import '../controllers/home_controller.dart';
 
-class HomeView extends GetView<HomeController> {
-  const HomeView({super.key});
+class HomeView extends StatelessWidget {
+  HomeView({super.key});
+
+  final HomeController controller = Get.put(HomeController());
 
   @override
   Widget build(BuildContext context) {
@@ -22,13 +24,13 @@ class HomeView extends GetView<HomeController> {
         ),
         centerTitle: true,
       ),
-      body: const SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
+      body: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: EdgeInsets.all(16.0),
+            const Padding(
+              padding: EdgeInsets.all(8.0),
               child: Text(
                 'Trending Movies',
                 style: TextStyle(
@@ -38,15 +40,29 @@ class HomeView extends GetView<HomeController> {
                 ),
               ),
             ),
-            SizedBox(
-              height: 15,
+            const SizedBox(
+              height: 10,
             ),
-            TrendingSlider(),
-            SizedBox(
-              height: 15,
+            Obx(() {
+              if (controller.isLoading.value) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              } else if (controller.trendingMovies.isEmpty) {
+                return const Center(
+                  child: Text("No trending movies found"),
+                );
+              } else {
+                return TrendingSlider(
+                  movies: controller.trendingMovies,
+                );
+              }
+            }),
+            const SizedBox(
+              height: 10,
             ),
-            Padding(
-              padding: EdgeInsets.all(16.0),
+            const Padding(
+              padding: EdgeInsets.all(8.0),
               child: Text(
                 "Top Rated Movies",
                 style: TextStyle(
@@ -55,15 +71,29 @@ class HomeView extends GetView<HomeController> {
                     fontWeight: FontWeight.bold),
               ),
             ),
-            SizedBox(
-              height: 15,
+            const SizedBox(
+              height: 10,
             ),
-            MoviesSlider(),
-            SizedBox(
-              height: 15,
+            Obx(() {
+              if (controller.isLoading.value) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              } else if (controller.topRatedMovies.isEmpty) {
+                return const Center(
+                  child: Text("No top rated movies found"),
+                );
+              } else {
+                return MoviesSlider(
+                  movies: controller.topRatedMovies,
+                );
+              }
+            }),
+            const SizedBox(
+              height: 10,
             ),
-            Padding(
-              padding: EdgeInsets.all(16.0),
+            const Padding(
+              padding: EdgeInsets.all(8.0),
               child: Text(
                 "Upcoming Movies",
                 style: TextStyle(
@@ -72,10 +102,26 @@ class HomeView extends GetView<HomeController> {
                     fontWeight: FontWeight.bold),
               ),
             ),
-            SizedBox(
-              height: 15,
+            const SizedBox(
+              height: 10,
             ),
-            MoviesSlider()
+            Obx(
+              () {
+                if (controller.isLoading.value) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                } else if (controller.upComingMovies.isEmpty) {
+                  return const Center(
+                    child: Text("No upcoming movies found"),
+                  );
+                } else {
+                  return MoviesSlider(
+                    movies: controller.upComingMovies,
+                  );
+                }
+              },
+            ),
           ],
         ),
       ),
