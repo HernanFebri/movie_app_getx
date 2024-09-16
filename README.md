@@ -17,12 +17,12 @@ Aplikasi ini dibangun menggunakan Flutter dan mengintegrasikan API untuk mendapa
 
 1. **Splash Screen**
 
-![alt text](Screenshot_1726497116.png)
+<img src="Screenshot_1726497116.png" alt="Splash Screen" width="300">
 
 2. **Home Screen**
 
-![alt text](Screenshot_1726497108.png)
+<img src="Screenshot_1726497108.png" alt="Home Screen" width="300">
 
 3. **Details Screen**
 
-![alt text](Screenshot_1726497136.png)
+<img src="Screenshot_1726497136.png" alt="Details Screen" width="300">
