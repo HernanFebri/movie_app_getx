@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:movie_app/widgets/back_button.dart';
 
 import '../../../../constants/constants.dart';
 import '../../../../models/movies_model.dart';
@@ -20,27 +21,7 @@ class DetailsScreenView extends GetView<DetailsScreenController> {
       body: CustomScrollView(
         slivers: [
           SliverAppBar.large(
-            leading: Container(
-              height: 70,
-              width: 70,
-              margin: const EdgeInsets.only(
-                top: 8,
-                left: 8,
-              ),
-              decoration: BoxDecoration(
-                color: AppColors.scaffoldBgColor,
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: IconButton(
-                onPressed: () {
-                  Get.back();
-                },
-                icon: const Icon(
-                  Icons.arrow_back_rounded,
-                  color: AppColors.textColor,
-                ),
-              ),
-            ),
+            leading: const BackBtn(),
             backgroundColor: AppColors.scaffoldBgColor,
             expandedHeight: 500,
             pinned: true,
@@ -58,8 +39,8 @@ class DetailsScreenView extends GetView<DetailsScreenController> {
               ),
               background: ClipRRect(
                 borderRadius: const BorderRadius.only(
-                  bottomLeft: Radius.circular(24),
-                  bottomRight: Radius.circular(24),
+                  bottomLeft: Radius.circular(32),
+                  bottomRight: Radius.circular(32),
                 ),
                 child: Image.network(
                   '${Constants.imagePath}${movie.backDropPath}',
@@ -84,7 +65,7 @@ class DetailsScreenView extends GetView<DetailsScreenController> {
                   Text(
                     'Overview',
                     style: GoogleFonts.openSans(
-                      fontSize: 28,
+                      fontSize: 24,
                       fontWeight: FontWeight.w800,
                       color: AppColors.textColor,
                     ),
@@ -106,6 +87,7 @@ class DetailsScreenView extends GetView<DetailsScreenController> {
                   ),
                   SizedBox(
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Container(
                           padding: const EdgeInsets.all(8),
@@ -133,7 +115,38 @@ class DetailsScreenView extends GetView<DetailsScreenController> {
                               )
                             ],
                           ),
-                        )
+                        ),
+                        Container(
+                          padding: const EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.grey),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Row(
+                            children: [
+                              Text(
+                                'Rating : ',
+                                style: GoogleFonts.roboto(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  color: AppColors.textColor,
+                                ),
+                              ),
+                              const Icon(
+                                Icons.star,
+                                color: AppColors.ratingColor,
+                              ),
+                              Text(
+                                '${movie.voteAverage.toStringAsFixed(1)}/10',
+                                style: GoogleFonts.roboto(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  color: AppColors.textColor,
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
                       ],
                     ),
                   )
