@@ -1,6 +1,8 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:movie_app/models/movies_model.dart';
+import 'package:get/get.dart';
+
+import '../models/movies_model.dart';
 
 class TrendingSlider extends StatelessWidget {
   final List<Movie> movies;
@@ -17,7 +19,7 @@ class TrendingSlider extends StatelessWidget {
       child: CarouselSlider.builder(
         itemCount: movies.length, // Sesuaikan jumlah item dengan jumlah film
         options: CarouselOptions(
-          viewportFraction: 0.5,
+          viewportFraction: 0.55,
           aspectRatio: 16 / 9,
           height: 300,
           enlargeCenterPage: true,
@@ -34,17 +36,22 @@ class TrendingSlider extends StatelessWidget {
               borderRadius: BorderRadius.circular(10),
             ),
             height: 300,
-            width: 200,
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(10),
-              child: Image.network(
-                movie.posterPath, // URL gambar dari movie
-                filterQuality: FilterQuality.high,
-                fit: BoxFit.cover,
-                errorBuilder: (context, error, stackTrace) {
-                  return const Icon(
-                      Icons.error); // Tampilkan ikon jika gagal memuat gambar
-                },
+            width: double.infinity,
+            child: GestureDetector(
+              onTap: () {
+                Get.toNamed('/details-screen', arguments: movie);
+              },
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Image.network(
+                  movie.posterPath, // URL gambar dari movie
+                  filterQuality: FilterQuality.high,
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) {
+                    return const Icon(
+                        Icons.error); // Tampilkan ikon jika gagal memuat gambar
+                  },
+                ),
               ),
             ),
           );

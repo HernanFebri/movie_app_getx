@@ -24,22 +24,28 @@ class MoviesSlider extends StatelessWidget {
           final movie = movies[index];
           return Padding(
             padding: const EdgeInsets.all(8.0),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(8),
-              child: SizedBox(
-                height: 200,
-                width: 150,
-                child: movie.posterPath != null
-                    ? Image.network(
-                        Constants.imagePath + movie.posterPath!,
-                        fit: BoxFit.cover,
-                      )
-                    : const Center(
-                        child: Text(
-                          'No Image Available',
-                          style: TextStyle(color: Colors.white),
+            child: GestureDetector(
+              onTap: () {
+                Get.toNamed('/details-screen', arguments: movie);
+              },
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: SizedBox(
+                  height: 200,
+                  width: 150,
+                  child: movie.posterPath.isNotEmpty
+                      ? Image.network(
+                          Constants.imagePath + movie.posterPath,
+                          fit: BoxFit.cover,
+                          filterQuality: FilterQuality.high,
+                        )
+                      : const Center(
+                          child: Text(
+                            'No Image Available',
+                            style: TextStyle(color: Colors.white),
+                          ),
                         ),
-                      ),
+                ),
               ),
             ),
           );
