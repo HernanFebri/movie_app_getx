@@ -87,15 +87,17 @@ class DetailsScreenView extends GetView<DetailsScreenController> {
                   ),
                   SizedBox(
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
+                        // Release date section
                         Container(
                           padding: const EdgeInsets.all(8),
                           decoration: BoxDecoration(
                             border: Border.all(color: Colors.grey),
                             borderRadius: BorderRadius.circular(10),
                           ),
-                          child: Row(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
                                 'Release date : ',
@@ -112,17 +114,20 @@ class DetailsScreenView extends GetView<DetailsScreenController> {
                                   fontWeight: FontWeight.bold,
                                   color: AppColors.textColor,
                                 ),
-                              )
+                              ),
                             ],
                           ),
                         ),
+
+                        // Rating section
                         Container(
                           padding: const EdgeInsets.all(8),
                           decoration: BoxDecoration(
                             border: Border.all(color: Colors.grey),
                             borderRadius: BorderRadius.circular(10),
                           ),
-                          child: Row(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
                                 'Rating : ',
@@ -132,18 +137,22 @@ class DetailsScreenView extends GetView<DetailsScreenController> {
                                   color: AppColors.textColor,
                                 ),
                               ),
-                              const Icon(
-                                Icons.star,
-                                color: AppColors.ratingColor,
+                              Row(
+                                children: [
+                                  const Icon(
+                                    Icons.star,
+                                    color: AppColors.ratingColor,
+                                  ),
+                                  Text(
+                                    '${movie.voteAverage.toStringAsFixed(1)}/10',
+                                    style: GoogleFonts.roboto(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                      color: AppColors.textColor,
+                                    ),
+                                  ),
+                                ],
                               ),
-                              Text(
-                                '${movie.voteAverage.toStringAsFixed(1)}/10',
-                                style: GoogleFonts.roboto(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                  color: AppColors.textColor,
-                                ),
-                              )
                             ],
                           ),
                         ),
